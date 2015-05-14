@@ -1,0 +1,51 @@
+version: 0.0.1.{build}-test
+
+os:
+- Windows Server 2012 R2
+
+shallow_clone: true
+
+environment:
+  LUAROCKS_VER: 2.2.2
+  matrix:
+  - LUA_VER: 5.1.5
+  - LUA_VER: 5.2.4
+  - LUA_VER: 5.2.4
+    NOCOMPAT: true
+  - LUA_VER: 5.3.0
+  - LUA_VER: 5.3.0
+    NOCOMPAT: true
+  - LJ_VER: 2.0.4
+  - LJ_VER: 2.1
+
+platform:
+  - x86
+  - x64
+
+cache:
+  - c:\lua -> appveyor.yml
+  - c:\external -> appveyor.yml
+
+init:
+# Setup Lua development/build environment
+# Make VS 2013 command line tools available
+- call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" %platform%
+
+install:
+# Setup Lua development/build environment
+- call .appveyor\install.bat
+- luarocks install "https://gist.githubusercontent.com/starius/719b194bb34ce612458c/raw/7ab5aa457164c5dccef2c06e0e06ffbed09319df/mediator_lua-1.1.1-0.rockspec"
+- luarocks install busted
+- luarocks install luacov
+- if "%LUA_SHORTV%"=="5.1" luarocks install bit32
+- luarocks install "https://gist.githubusercontent.com/starius/6c21000109674dd36bfa/raw/f2d931448ce0d0b53c124513eaceaf401a7f87a1/luacov-coveralls-scm-0.rockspec"
+
+build_script:
+- luarocks make
+
+test_script:
+- cd %APPVEYOR_BUILD_FOLDER%
+- busted -c
+
+#after_test:
+#- luacov-coveralls -v
