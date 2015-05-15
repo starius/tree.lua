@@ -186,7 +186,7 @@ D   E
         local exp = {C, D, E}
         table.sort(exp, cmpAsStrings)
         -- iterator
-        local arrayFromIt = require 'tree.arrayFromIt'
+        local arrayFromIt = require 'tree.detail.arrayFromIt'
         local leafs = arrayFromIt(tree:iterLeafs())
         table.sort(leafs, cmpAsStrings)
         assert.same(exp, leafs)
@@ -320,7 +320,7 @@ D   E
         table.sort(nodes, cmpAsStrings)
         assert.same(exp, nodes)
         -- Method tree:iterNodes(), iterator
-        local arrayFromIt = require 'tree.arrayFromIt'
+        local arrayFromIt = require 'tree.detail.arrayFromIt'
         local nodes = arrayFromIt(tree:iterNodes())
         table.sort(nodes, cmpAsStrings)
         assert.same(exp, nodes)
