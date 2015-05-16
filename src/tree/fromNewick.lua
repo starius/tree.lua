@@ -40,7 +40,7 @@ grammar (semicolon, parentheses, comma, and colon) are
 prohibited.
 ]]
 
-return function(text)
+return function(text, leafs)
     local lpeg = require 'lpeg'
     local V, R, S, L = lpeg.V, lpeg.R, lpeg.S, lpeg.locale()
 
@@ -93,10 +93,18 @@ return function(text)
     }
 ]]
 
+    local name2leaf = {}
+    if leafs then
+        for _, leaf in ipairs(leafs) do
+            name2leaf[leaf.name] = leaf
+        end
+    end
+
     local children_of = {}
 
     local function fromNewick(raw_node)
-        local node = {name = raw_node.name}
+        local name = raw_node.name
+        local node = name2leaf[name] or {name = name}
         children_of[node] = {}
         for _, raw_child in ipairs(raw_node) do
             local child = fromNewick(raw_child)

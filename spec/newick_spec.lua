@@ -104,4 +104,44 @@ D   E
         assert.equal(5, #tree2:nodes())
         assert.equal(3, #tree2:leafs())
     end)
+
+    it("serializes and parses a complex tree (same leafs)",
+    function()
+        local Tree = require 'tree.Tree'
+        local A = {name='A'}
+        local B = {name='B'}
+        local C = {name='C'}
+        local D = {name='D'}
+        local E = {name='E'}
+        local tree = Tree {
+            [A] = {[B] = {length=1}, [C] = {length=2}},
+            [B] = {[D] = {length=3}, [E] = {length=4}},
+        }
+        --
+        local toNewick = require 'tree.toNewick'
+        local newick = toNewick(tree)
+        assert.truthy(newick:match('%)B:1'))
+        assert.truthy(newick:match('C:2'))
+        assert.truthy(newick:match('D:3'))
+        assert.truthy(newick:match('E:4'))
+        --
+        local fromNewick = require 'tree.fromNewick'
+        local leafs = {C, D, E}
+        local tree2 = fromNewick(newick, leafs)
+        assert.equal(5, #tree2:nodes())
+        assert.equal(3, #tree2:leafs())
+        assert.truthy(tree2:isLeaf(C))
+        assert.truthy(tree2:isLeaf(D))
+        assert.truthy(tree2:isLeaf(E))
+        assert.falsy(tree2:isNode(A))
+        assert.falsy(tree2:isNode(B))
+        local A2 = tree2:parentOf(C)
+        local B2 = tree2:parentOf(D)
+        assert.equal(A2, tree2:parentOf(B2))
+        assert.equal(B2, tree2:parentOf(E))
+        assert.equal(1, tree2:edge(A2, B2).length)
+        assert.equal(2, tree2:edge(A2, C).length)
+        assert.equal(3, tree2:edge(B2, D).length)
+        assert.equal(4, tree2:edge(B2, E).length)
+    end)
 end)
