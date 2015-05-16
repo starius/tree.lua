@@ -41,7 +41,7 @@ describe("tree.fromNewick and tree.toNewick", function()
         local toNewick = require 'tree.toNewick'
         local newick = toNewick(tree)
         assert.truthy(newick == '(A:2,B:3);' or
-            newick == '(B:3,A:2)r;')
+            newick == '(B:3,A:2);')
     end)
 
     it("throws an error if leafs do not have names", function()
