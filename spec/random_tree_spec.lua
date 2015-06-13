@@ -19,6 +19,8 @@ describe("random tree", function()
         end
         local t = Tree(children_of)
         --
+        local lpeg = require 'lpeg'
+        lpeg.setmaxstack(100000)
         local toNewick = require 'tree.toNewick'
         local fromNewick = require 'tree.fromNewick'
         local t2 = fromNewick(toNewick(t))
