@@ -22,10 +22,6 @@ platform:
   - x86
   - x64
 
-cache:
-  - c:\lua -> appveyor.yml
-  - c:\external -> appveyor.yml
-
 init:
 # Setup Lua development/build environment
 # Make VS 2013 command line tools available
