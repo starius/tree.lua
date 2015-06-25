@@ -7,4 +7,5 @@ return {
     Tree = require 'tree.Tree',
     toNewick = require 'tree.toNewick',
     fromNewick = require 'tree.fromNewick',
+    toDot = require 'tree.toDot',
 }

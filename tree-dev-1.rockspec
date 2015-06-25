@@ -24,6 +24,7 @@ build = {
         ['tree.Tree'] = 'src/tree/Tree.lua',
         ['tree.toNewick'] = 'src/tree/toNewick.lua',
         ['tree.fromNewick'] = 'src/tree/fromNewick.lua',
+        ['tree.toDot'] = 'src/tree/toDot.lua',
         ['tree.detail.breadthFirst'] = 'src/tree/detail/breadthFirst.lua',
         ['tree.detail.depthFirst'] = 'src/tree/detail/depthFirst.lua',
         ['tree.detail.newNeighbours'] = 'src/tree/detail/newNeighbours.lua',
