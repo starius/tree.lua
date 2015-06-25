@@ -146,6 +146,19 @@ describe("tree.Graph", function()
             and p[5] == c and p[6] == e))
     end)
 
+    it("yields level, parent, edge from iterator", function()
+        local Graph = require 'tree.Graph'
+        local a = {}
+        local b = {}
+        local edge = {}
+        local graph = Graph({a, b}, {
+            {a, b, edge},
+        })
+        local it = graph:iterDepth(a)
+        assert.same({a, 0, nil, nil}, {it()})
+        assert.same({b, 1, a, edge}, {it()})
+    end)
+
     it("gets if it is connected", function()
         -- a - b - c - e
         --     |
