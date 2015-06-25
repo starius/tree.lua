@@ -19,4 +19,21 @@ describe("tree.toDot", function()
         assert.truthy(dot:match('1.2'))
         assert.falsy(dot:match('bar'))
     end)
+
+    it("prints all edges of non-connected graph", function()
+        local tree = require 'tree'
+        local a = {}
+        local b = {}
+        local c = {}
+        local d = {}
+        local nodes = {a, b, c, d}
+        local edges = {
+            {a, b, {length=42}},
+            {c, d, {length=66}},
+        }
+        local graph = tree.Graph(nodes, edges)
+        local dot = tree.toDot(graph)
+        assert.truthy(dot:match('42'))
+        assert.truthy(dot:match('66'))
+    end)
 end)

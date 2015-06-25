@@ -28,15 +28,12 @@ return function(graph)
         end
     end
     -- print edges
-    local root = graph:nodes()[1]
-    for n1, _, n2, edge in graph:iterDepth(root) do
-        if edge then -- root do not has parent, so edge = nil
-            local n1_s = node2name[n1]
-            local n2_s = node2name[n2]
-            local edge_s = edge.length or ''
-            local edge_str = '%s -- %s [label=%q];'
-            print(edge_str:format(n1_s, n2_s, edge_s))
-        end
+    for n1, n2, edge in graph:iterPairs() do
+        local n1_s = node2name[n1]
+        local n2_s = node2name[n2]
+        local edge_s = edge.length or ''
+        local edge_str = '%s -- %s [label=%q];'
+        print(edge_str:format(n1_s, n2_s, edge_s))
     end
     -- close graph
     print('}')
