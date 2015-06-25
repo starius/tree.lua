@@ -568,4 +568,23 @@ D   E F   G
             tree:iterBreadth({1})
         end)
     end)
+
+    it("convert to a graph", function()
+        local Tree = require 'tree.Tree'
+        local A = {1}
+        local B = {2}
+        local C = {2}
+        local D = {2}
+        local tree = Tree {
+            [A] = {[B] = {}},
+            [B] = {[C] = {}, [D] = {}},
+        }
+        local graph = tree:toGraph()
+        assert.truthy(graph:edge(A, B))
+        assert.truthy(graph:edge(B, C))
+        assert.truthy(graph:edge(B, D))
+        assert.falsy(graph:edge(A, C))
+        assert.falsy(graph:edge(A, D))
+        assert.falsy(graph:edge(C, D))
+    end)
 end)
