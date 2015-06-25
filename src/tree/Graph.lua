@@ -41,6 +41,20 @@ function mt.iterNodes(self)
     end)
 end
 
+function mt.iterPairs(self)
+    return coroutine.wrap(function()
+        local seen_edges = {}
+        for node1, neighbours in pairs(self._neighbours) do
+            for node2, edge in pairs(neighbours) do
+                if not seen_edges[edge] then
+                    seen_edges[edge] = true
+                    coroutine.yield(node1, node2, edge)
+                end
+            end
+        end
+    end)
+end
+
 function mt.nodes(self)
     local arrayFromIt = require 'tree.detail.arrayFromIt'
     return arrayFromIt(self:iterNodes())

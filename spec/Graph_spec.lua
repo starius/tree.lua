@@ -73,6 +73,32 @@ describe("tree.Graph", function()
         assert.equal('bar', graph:edge(b, a).foo)
     end)
 
+    it("iterates all edges", function()
+        local Graph = require 'tree.Graph'
+        local a = {}
+        local b = {}
+        local c = {}
+        local d = {}
+        local graph = Graph({a, b, c, d}, {
+            {a, b, {foo='bar1'}},
+            {c, d, {foo='bar2'}},
+        })
+        local seen_foos = {}
+        for n1, n2, edge in graph:iterPairs() do
+            if edge.foo == 'bar1' then
+                assert.truthy(n1 == a or n1 == b)
+                assert.truthy(n2 == a or n2 == b)
+            elseif edge.foo == 'bar2' then
+                assert.truthy(n1 == c or n1 == d)
+                assert.truthy(n2 == c or n2 == d)
+            else
+                error('bad foo')
+            end
+            table.insert(seen_foos, edge.foo)
+        end
+        assert.equal(2, #seen_foos)
+    end)
+
     it("gets nodes", function()
         local Graph = require 'tree.Graph'
         local a = {}
