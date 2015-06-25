@@ -21,6 +21,7 @@ local function constructor(nodes, edges)
         local node2 = assert(edge[2])
         local options = assert(edge[3])
         assert(node1 ~= node2)
+        assert(not graph._neighbours[node1][node2])
         graph._neighbours[node1][node2] = options
         graph._neighbours[node2][node1] = options
     end
