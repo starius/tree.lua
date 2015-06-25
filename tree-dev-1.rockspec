@@ -31,4 +31,9 @@ build = {
         ['tree.detail.compat'] = 'src/tree/detail/compat.lua',
         ['tree.detail.arrayFromIt'] = 'src/tree/detail/arrayFromIt.lua',
     },
+    install = {
+        bin = {
+            newick2dot = 'src/bin/newick2dot.lua',
+        },
+    },
 }
