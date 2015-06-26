@@ -20,6 +20,23 @@ describe("tree.toDot", function()
         assert.falsy(dot:match('bar'))
     end)
 
+    it("converts a graph with named nodes to DOT format",
+    function()
+        local tree = require 'tree'
+        local a = {name='test'}
+        local b = {}
+        local c = {}
+        local nodes = {a, b, c}
+        local edges = {
+            {a, b, {}},
+            {b, c, {}},
+            {a, c, {}},
+        }
+        local graph = tree.Graph(nodes, edges)
+        local dot = tree.toDot(graph)
+        assert.truthy(dot:match('test'))
+    end)
+
     it("prints all edges of non-connected graph", function()
         local tree = require 'tree'
         local a = {}
