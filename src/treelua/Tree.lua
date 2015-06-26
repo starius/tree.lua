@@ -81,7 +81,7 @@ function mt.iterNodes(self)
 end
 
 function mt.nodes(self)
-    local arrayFromIt = require 'tree.detail.arrayFromIt'
+    local arrayFromIt = require 'treelua.detail.arrayFromIt'
     return arrayFromIt(self:iterNodes())
 end
 
@@ -105,12 +105,12 @@ function mt.iterLeafs(self)
 end
 
 function mt.leafs(self)
-    local arrayFromIt = require 'tree.detail.arrayFromIt'
+    local arrayFromIt = require 'treelua.detail.arrayFromIt'
     return arrayFromIt(self:iterLeafs())
 end
 
 local function getNeighbours(self)
-    local newNeighbours = require 'tree.detail.newNeighbours'
+    local newNeighbours = require 'treelua.detail.newNeighbours'
     return newNeighbours(function(node1)
         return coroutine.wrap(function()
             local parent = self._parent_of[node1]
@@ -130,7 +130,7 @@ function mt.iterBreadth(self, init)
     assert(self:isNode(init))
     -- https://en.wikipedia.org/wiki/Breadth-first_search
     return coroutine.wrap(function()
-        local breadthFirst = require 'tree.detail.breadthFirst'
+        local breadthFirst = require 'treelua.detail.breadthFirst'
         breadthFirst(init, getNeighbours(self),
             coroutine.yield)
     end)
@@ -140,7 +140,7 @@ function mt.iterDepth(self, init)
     assert(self:isNode(init))
     -- https://en.wikipedia.org/wiki/Depth-first_search
     return coroutine.wrap(function()
-        local depthFirst = require 'tree.detail.depthFirst'
+        local depthFirst = require 'treelua.detail.depthFirst'
         depthFirst(init, getNeighbours(self),
             coroutine.yield)
     end)
@@ -155,7 +155,7 @@ function mt.toGraph(self)
             table.insert(edges, {node, parent, edge})
         end
     end
-    local Graph = require 'tree.Graph'
+    local Graph = require 'treelua.Graph'
     return Graph(nodes, edges)
 end
 

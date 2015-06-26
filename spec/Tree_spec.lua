@@ -4,7 +4,7 @@
 
 describe("tree.Tree", function()
     it("creates a tree from children list", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local parent = {}
         local child1 = {}; local edge1 = {}
         local child2 = {}; local edge2 = {}
@@ -16,7 +16,7 @@ describe("tree.Tree", function()
     end)
 
     it("throws if multiple roots", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local parent1 = {}
         local child1 = {}
         local parent2 = {}
@@ -30,7 +30,7 @@ describe("tree.Tree", function()
     end)
 
     it("throws if ownership is cyclic", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local node1 = {}
         local node2 = {}
         assert.has_error(function()
@@ -43,7 +43,7 @@ describe("tree.Tree", function()
 
     it("throws if ownership is cyclic even if root exists",
     function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local root = {}
         local node1 = {}
         local node2 = {}
@@ -57,7 +57,7 @@ describe("tree.Tree", function()
     end)
 
     it("gets root", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local parent = {}
         local child1 = {}; local edge1 = {}
         local child2 = {}; local edge2 = {}
@@ -78,7 +78,7 @@ D   E
 ]]
 
     it("gets parent of nodes", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {}
         local B = {}
         local C = {}
@@ -107,7 +107,7 @@ D   E
     end)
 
     it("infers leafs in definition", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local parent = {}
         local child1 = {}; local edge1 = {}
         local child2 = {}; local edge2 = {}
@@ -118,7 +118,7 @@ D   E
     end)
 
     it("returns if smth is a node", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local parent = {1}
         local child1 = {2}; local edge1 = {22}
         local child2 = {3}; local edge2 = {23}
@@ -144,7 +144,7 @@ D   E
 ]]
 
     it("gets if a node is leaf", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {}
         local B = {}
         local C = {}
@@ -172,7 +172,7 @@ D   E
     end
 
     it("gets leafs", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {1}
         local B = {2}
         local C = {3}
@@ -186,7 +186,7 @@ D   E
         local exp = {C, D, E}
         table.sort(exp, cmpAsStrings)
         -- iterator
-        local arrayFromIt = require 'tree.detail.arrayFromIt'
+        local arrayFromIt = require 'treelua.detail.arrayFromIt'
         local leafs = arrayFromIt(tree:iterLeafs())
         table.sort(leafs, cmpAsStrings)
         assert.same(exp, leafs)
@@ -205,7 +205,7 @@ D   E
     end
 
     it("gets #children of nodes", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local parent = {1}
         local child1 = {2}; local edge1 = {22}
         local child2 = {3}; local edge2 = {23}
@@ -227,7 +227,7 @@ D   E
     end)
 
     it("gets children of nodes (larger example)", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {1}
         local B = {2}; local edgeB = {22}
         local C = {3}; local edgeC = {23}
@@ -247,7 +247,7 @@ D   E
     end)
 
     it("gets edges of nodes", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local parent = {}
         local child1 = {}; local edge1 = {}
         local child2 = {}; local edge2 = {}
@@ -263,7 +263,7 @@ D   E
     end)
 
     it("throws in edge() is called with non-nodes", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local parent = {}
         local child1 = {}; local edge1 = {}
         local child2 = {}; local edge2 = {}
@@ -303,7 +303,7 @@ D   E
     end)
 
     it("gets nodes of tree", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local parent = {1}
         local child1 = {2}; local edge1 = {}
         local child2 = {3}; local edge2 = {}
@@ -320,7 +320,7 @@ D   E
         table.sort(nodes, cmpAsStrings)
         assert.same(exp, nodes)
         -- Method tree:iterNodes(), iterator
-        local arrayFromIt = require 'tree.detail.arrayFromIt'
+        local arrayFromIt = require 'treelua.detail.arrayFromIt'
         local nodes = arrayFromIt(tree:iterNodes())
         table.sort(nodes, cmpAsStrings)
         assert.same(exp, nodes)
@@ -336,7 +336,7 @@ D   E F   G
 ]]
 
     it("travere depth-first, starting from root", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {1}
         local B = {2}; local edgeB = {22}
         local C = {3}; local edgeC = {23}
@@ -386,7 +386,7 @@ D   E F   G
 ]]
 
     it("travere depth-first, starting from leaf", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {1}
         local B = {2}; local edgeB = {22}
         local C = {3}; local edgeC = {23}
@@ -417,7 +417,7 @@ D   E F   G
     end)
 
     it("travere depth-first, starting from middle", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {1}
         local B = {2}; local edgeB = {22}
         local C = {3}; local edgeC = {23}
@@ -448,7 +448,7 @@ D   E F   G
     end)
 
     it("travere breadth-first, starting from root", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {1}
         local B = {2}; local edgeB = {22}
         local C = {3}; local edgeC = {23}
@@ -486,7 +486,7 @@ D   E F   G
     end)
 
     it("travere breadth-first, starting from leaf", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {1}
         local B = {2}; local edgeB = {22}
         local C = {3}; local edgeC = {23}
@@ -522,7 +522,7 @@ D   E F   G
     end)
 
     it("travere breadth-first, starting from middle", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {1}
         local B = {2}; local edgeB = {22}
         local C = {3}; local edgeC = {23}
@@ -558,7 +558,7 @@ D   E F   G
     end)
 
     it("throws if trying to traverse from non-node", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {1}
         local B = {2}
         local tree = Tree {
@@ -570,7 +570,7 @@ D   E F   G
     end)
 
     it("convert to a graph", function()
-        local Tree = require 'tree.Tree'
+        local Tree = require 'treelua.Tree'
         local A = {1}
         local B = {2}
         local C = {2}

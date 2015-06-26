@@ -118,6 +118,6 @@ return function(text, leafs)
     end
 
     fromNewick(raw)
-    local Tree = require 'tree.Tree'
+    local Tree = require 'treelua.Tree'
     return Tree(children_of)
 end

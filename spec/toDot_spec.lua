@@ -4,7 +4,7 @@
 
 describe("tree.toDot", function()
     it("converts a graph to DOT format", function()
-        local tree = require 'tree'
+        local tree = require 'treelua'
         local a = {}
         local b = {}
         local c = {}
@@ -22,7 +22,7 @@ describe("tree.toDot", function()
 
     it("converts a graph with named nodes to DOT format",
     function()
-        local tree = require 'tree'
+        local tree = require 'treelua'
         local a = {name='test'}
         local b = {}
         local c = {}
@@ -38,7 +38,7 @@ describe("tree.toDot", function()
     end)
 
     it("prints all edges of non-connected graph", function()
-        local tree = require 'tree'
+        local tree = require 'treelua'
         local a = {}
         local b = {}
         local c = {}

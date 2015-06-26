@@ -9,15 +9,19 @@
 -- func is applied to every (node, level, parent, edge),
 --   including init node (for which parent = edge = nil
 return function(init, newNeighbours, func)
-    local unpack = require 'tree.detail.compat'.unpack
-    local stack = {{init, 0, nil, nil}}  -- parent, edge
-    while #stack > 0 do
-        local item = table.remove(stack)
-        local node1, level, parent, edge = unpack(item)
-        func(node1, level, parent, edge)
-        level = level + 1
-        for node2, edge in newNeighbours(node1) do
-            table.insert(stack, {node2, level, node1, edge})
+    local unpack = require 'treelua.detail.compat'.unpack
+    local queue = {{init, nil, nil}}  -- parent, edge
+    local level = 0
+    while #queue > 0 do
+        local queue2 = {}
+        for _, item in ipairs(queue) do
+            local node1, parent, edge = unpack(item)
+            func(node1, level, parent, edge)
+            for node2, edge in newNeighbours(node1) do
+                table.insert(queue2, {node2, node1, edge})
+            end
         end
+        level = level + 1
+        queue = queue2
     end
 end

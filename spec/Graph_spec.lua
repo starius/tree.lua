@@ -4,7 +4,7 @@
 
 describe("tree.Graph", function()
     it("creates a graph from nodes and edges", function()
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local b = {}
         local c = {}
@@ -17,20 +17,20 @@ describe("tree.Graph", function()
     end)
 
     it("can't create en empty graph", function()
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         assert.has_error(function()
             local graph = Graph({}, {})
         end)
     end)
 
     it("can create a graph with no edges", function()
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local graph = Graph({a}, {})
     end)
 
     it("can't make a loop", function()
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         assert.has_error(function()
             local a = {}
             local graph = Graph({a}, {
@@ -40,7 +40,7 @@ describe("tree.Graph", function()
     end)
 
     it("can't use edges of unknown nodes", function()
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local b = {}
         assert.has_error(function()
@@ -51,7 +51,7 @@ describe("tree.Graph", function()
     end)
 
     it("can't use double edges", function()
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local b = {}
         assert.has_error(function()
@@ -63,7 +63,7 @@ describe("tree.Graph", function()
     end)
 
     it("extracts edge", function()
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local b = {}
         local graph = Graph({a, b}, {
@@ -74,7 +74,7 @@ describe("tree.Graph", function()
     end)
 
     it("iterates all edges", function()
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local b = {}
         local c = {}
@@ -100,7 +100,7 @@ describe("tree.Graph", function()
     end)
 
     it("gets nodes", function()
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local graph = Graph({a}, {})
         assert.equal(1, #graph:nodes())
@@ -108,7 +108,7 @@ describe("tree.Graph", function()
     end)
 
     it("iterates nodes", function()
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local graph = Graph({a}, {})
         local it = graph:iterNodes()
@@ -120,7 +120,7 @@ describe("tree.Graph", function()
         -- a - b - c - e
         --     |
         --     d - f
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local b = {}
         local c = {}
@@ -135,7 +135,7 @@ describe("tree.Graph", function()
             {d, f, {}},
         })
         local it = graph:iterBreadth(a)
-        local p = require 'tree.detail.arrayFromIt'(it)
+        local p = require 'treelua.detail.arrayFromIt'(it)
         assert.truthy(p[1] == a)
         assert.truthy(p[2] == b)
         assert.truthy((p[3] == c and p[4] == d) or
@@ -148,7 +148,7 @@ describe("tree.Graph", function()
         -- a - b - c - e
         --     |
         --     d - f
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local b = {}
         local c = {}
@@ -163,7 +163,7 @@ describe("tree.Graph", function()
             {d, f, {}},
         })
         local it = graph:iterDepth(a)
-        local p = require 'tree.detail.arrayFromIt'(it)
+        local p = require 'treelua.detail.arrayFromIt'(it)
         assert.truthy(p[1] == a)
         assert.truthy(p[2] == b)
         assert.truthy((p[3] == c and p[4] == e
@@ -173,7 +173,7 @@ describe("tree.Graph", function()
     end)
 
     it("yields level, parent, edge from iterator", function()
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local b = {}
         local edge = {}
@@ -189,7 +189,7 @@ describe("tree.Graph", function()
         -- a - b - c - e
         --     |
         --     d - f
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local b = {}
         local c = {}
@@ -222,7 +222,7 @@ describe("tree.Graph", function()
         -- a - b - c - e
         --     |
         --     d - f
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local b = {}
         local c = {}
@@ -268,7 +268,7 @@ describe("tree.Graph", function()
         -- a - b - c - e
         --     |
         --     d - f
-        local Graph = require 'tree.Graph'
+        local Graph = require 'treelua.Graph'
         local a = {}
         local b = {}
         local c = {}

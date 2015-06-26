@@ -4,7 +4,7 @@
 -- Copyright (C) 2015 Boris Nagaev
 -- See the LICENSE file for terms of use.
 
-local T = require 'tree'
+local T = require 'treelua'
 
 local newick = io.read('*all')
 local tree = T.fromNewick(newick)
