@@ -66,7 +66,7 @@ if "%LUA%"=="luajit" (
 			set lj_source_folder=%APPVEYOR_BUILD_FOLDER%\downloads\luajit-%LJ_VER%
 			if not exist !lj_source_folder! (
 				echo Downloading... %LUAJIT_URL%/v%LJ_VER%.tar.gz
-				curl --silent --fail --max-time 120 --connect-timeout 30 %LUAJIT_URL%/v%LJ_VER%.tar.gz | %SEVENZIP% x -si -so -tgzip | %SEVENZIP% x -si -ttar -aoa -odownloads
+				curl --location --silent --fail --max-time 120 --connect-timeout 30 %LUAJIT_URL%/v%LJ_VER%.tar.gz | %SEVENZIP% x -si -so -tgzip | %SEVENZIP% x -si -ttar -aoa -odownloads
 			)
 			cd !lj_source_folder!\src
 		)
